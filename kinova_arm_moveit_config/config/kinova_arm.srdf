@@ -10,6 +10,7 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="kinova_arm">
+        <link name="arm_base_link"/>
         <link name="kinova_base"/>
         <link name="kinova_shoulder"/>
         <link name="kinova_half_arm_one"/>
@@ -18,64 +19,136 @@
         <link name="kinova_spherical_wrist_one"/>
         <link name="kinova_spherical_wrist_two"/>
         <link name="kinova_camera"/>
-        <link name="gripper_base"/>
-        <joint name="shoulder_joint"/>
         <joint name="half_arm_one_joint"/>
+        <joint name="shoulder_joint"/>
         <joint name="half_arm_two_joint"/>
-        <joint name="spherical_wrist_one_joint"/>
         <joint name="fore_arm_joint"/>
+        <joint name="spherical_wrist_one_joint"/>
         <joint name="spherical_wrist_two_joint"/>
         <joint name="camera_joint"/>
-        <joint name="gripper_base_joint"/>
-        <chain base_link="kinova_base" tip_link="gripper_base"/>
+        <chain base_link="kinova_base" tip_link="kinova_camera"/>
     </group>
-    <group name="kinova_gripper">
-        <link name="gripper_base"/>
-        <link name="left_gripper_finger"/>
-        <link name="right_gripper_finger"/>
-        <joint name="left_finger_joint"/>
-        <joint name="right_finger_joint"/>
-        <joint name="gripper_base_joint"/>
+    <group name="kinova_arm_gripper">
+        <link name="gripper_left_knuckle_link"/>
+        <link name="gripper_left_inner_knuckle_link"/>
+        <link name="gripper_base_link"/>
+        <link name="gripper_left_finger_tip_link"/>
+        <link name="gripper_left_finger_link"/>
+        <link name="gripper_right_inner_knuckle_link"/>
+        <link name="gripper_right_knuckle_link"/>
+        <link name="gripper_right_finger_link"/>
+        <link name="gripper_right_finger_tip_link"/>
+        <joint name="gripper_left_inner_knuckle_joint"/>
+        <joint name="gripper_joint"/>
+        <joint name="gripper_left_knuckle_joint"/>
+        <joint name="gripper_left_finger_joint"/>
+        <joint name="gripper_left_finger_tip_joint"/>
+        <joint name="gripper_right_inner_knuckle_joint"/>
+        <joint name="gripper_right_knuckle_joint"/>
+        <joint name="gripper_right_finger_joint"/>
+        <joint name="gripper_right_finger_tip_joint"/>
+        <chain base_link="gripper_base_link" tip_link="gripper_left_finger_tip_link"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="initial" group="kinova_arm">
-        <joint name="camera_joint" value="0"/>
-        <joint name="fore_arm_joint" value="0"/>
-        <joint name="half_arm_one_joint" value="0"/>
-        <joint name="half_arm_two_joint" value="0"/>
-        <joint name="shoulder_joint" value="0"/>
-        <joint name="spherical_wrist_one_joint" value="0"/>
-        <joint name="spherical_wrist_two_joint" value="0"/>
+    <group_state name="gripper_close" group="kinova_arm_gripper">
+        <joint name="gripper_left_knuckle_joint" value="0.8"/>
     </group_state>
-    <group_state name="arm_ready" group="kinova_arm">
+    <group_state name="gripper_open" group="kinova_arm_gripper">
+        <joint name="gripper_left_knuckle_joint" value="0"/>
+    </group_state>
+    <group_state name="arm_initial_position" group="kinova_arm">
         <joint name="camera_joint" value="0"/>
         <joint name="fore_arm_joint" value="1.5"/>
-        <joint name="half_arm_one_joint" value="-0.75"/>
+        <joint name="half_arm_one_joint" value="-1"/>
         <joint name="half_arm_two_joint" value="0"/>
         <joint name="shoulder_joint" value="0"/>
         <joint name="spherical_wrist_one_joint" value="0"/>
         <joint name="spherical_wrist_two_joint" value="1"/>
     </group_state>
-    <group_state name="gripper_open" group="kinova_gripper">
-        <joint name="left_finger_joint" value="0"/>
-        <joint name="right_finger_joint" value="0"/>
-    </group_state>
-    <group_state name="gripper_close" group="kinova_gripper">
-        <joint name="left_finger_joint" value="-0.026"/>
-        <joint name="right_finger_joint" value="-0.026"/>
-    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="kinova_end_effector" parent_link="gripper_base" group="kinova_gripper" parent_group="kinova_arm"/>
-    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="kinova_arm_virtual_joint" type="fixed" parent_frame="kinova_arm_base" child_link="arm_base_link"/>
+    <end_effector name="kinova_robotiq_gripper" parent_link="arm_base_link" group="kinova_arm_gripper"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="gripper_base" link2="kinova_camera" reason="Adjacent"/>
-    <disable_collisions link1="gripper_base" link2="kinova_fore_arm" reason="Never"/>
-    <disable_collisions link1="gripper_base" link2="kinova_half_arm_two" reason="Never"/>
-    <disable_collisions link1="gripper_base" link2="kinova_spherical_wrist_one" reason="Never"/>
-    <disable_collisions link1="gripper_base" link2="kinova_spherical_wrist_two" reason="Never"/>
-    <disable_collisions link1="gripper_base" link2="left_gripper_finger" reason="Adjacent"/>
-    <disable_collisions link1="gripper_base" link2="right_gripper_finger" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_left_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_left_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_left_inner_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_left_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_right_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_right_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_right_inner_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="gripper_right_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="kinova_camera" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_base_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_left_finger_tip_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_left_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_left_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_right_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_right_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_right_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_left_inner_knuckle_link" reason="Default"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_left_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_right_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_right_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_right_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_left_finger_tip_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="gripper_left_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="gripper_right_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="gripper_right_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="gripper_right_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_left_inner_knuckle_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="gripper_right_finger_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="gripper_right_finger_tip_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="gripper_right_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_left_knuckle_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="gripper_right_finger_tip_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="gripper_right_inner_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="gripper_right_knuckle_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="gripper_right_inner_knuckle_link" reason="Default"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_right_finger_tip_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="gripper_right_knuckle_link" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_right_inner_knuckle_link" link2="kinova_spherical_wrist_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_knuckle_link" link2="kinova_camera" reason="Never"/>
+    <disable_collisions link1="gripper_right_knuckle_link" link2="kinova_fore_arm" reason="Never"/>
+    <disable_collisions link1="gripper_right_knuckle_link" link2="kinova_half_arm_two" reason="Never"/>
+    <disable_collisions link1="gripper_right_knuckle_link" link2="kinova_spherical_wrist_one" reason="Never"/>
+    <disable_collisions link1="gripper_right_knuckle_link" link2="kinova_spherical_wrist_two" reason="Never"/>
     <disable_collisions link1="kinova_base" link2="kinova_fore_arm" reason="Never"/>
     <disable_collisions link1="kinova_base" link2="kinova_half_arm_one" reason="Never"/>
     <disable_collisions link1="kinova_base" link2="kinova_half_arm_two" reason="Never"/>
@@ -83,15 +156,11 @@
     <disable_collisions link1="kinova_camera" link2="kinova_fore_arm" reason="Never"/>
     <disable_collisions link1="kinova_camera" link2="kinova_spherical_wrist_one" reason="Never"/>
     <disable_collisions link1="kinova_camera" link2="kinova_spherical_wrist_two" reason="Adjacent"/>
-    <disable_collisions link1="kinova_camera" link2="left_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_camera" link2="right_gripper_finger" reason="Never"/>
     <disable_collisions link1="kinova_fore_arm" link2="kinova_half_arm_one" reason="Never"/>
     <disable_collisions link1="kinova_fore_arm" link2="kinova_half_arm_two" reason="Adjacent"/>
     <disable_collisions link1="kinova_fore_arm" link2="kinova_shoulder" reason="Never"/>
     <disable_collisions link1="kinova_fore_arm" link2="kinova_spherical_wrist_one" reason="Adjacent"/>
     <disable_collisions link1="kinova_fore_arm" link2="kinova_spherical_wrist_two" reason="Never"/>
-    <disable_collisions link1="kinova_fore_arm" link2="left_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_fore_arm" link2="right_gripper_finger" reason="Never"/>
     <disable_collisions link1="kinova_half_arm_one" link2="kinova_half_arm_two" reason="Adjacent"/>
     <disable_collisions link1="kinova_half_arm_one" link2="kinova_shoulder" reason="Adjacent"/>
     <disable_collisions link1="kinova_half_arm_one" link2="kinova_spherical_wrist_one" reason="Never"/>
@@ -99,14 +168,6 @@
     <disable_collisions link1="kinova_half_arm_two" link2="kinova_shoulder" reason="Never"/>
     <disable_collisions link1="kinova_half_arm_two" link2="kinova_spherical_wrist_one" reason="Never"/>
     <disable_collisions link1="kinova_half_arm_two" link2="kinova_spherical_wrist_two" reason="Never"/>
-    <disable_collisions link1="kinova_half_arm_two" link2="left_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_half_arm_two" link2="right_gripper_finger" reason="Never"/>
     <disable_collisions link1="kinova_shoulder" link2="kinova_spherical_wrist_one" reason="Never"/>
-    <disable_collisions link1="kinova_shoulder" link2="kinova_spherical_wrist_two" reason="Never"/>
     <disable_collisions link1="kinova_spherical_wrist_one" link2="kinova_spherical_wrist_two" reason="Adjacent"/>
-    <disable_collisions link1="kinova_spherical_wrist_one" link2="left_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_spherical_wrist_one" link2="right_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_spherical_wrist_two" link2="left_gripper_finger" reason="Never"/>
-    <disable_collisions link1="kinova_spherical_wrist_two" link2="right_gripper_finger" reason="Never"/>
-    <disable_collisions link1="left_gripper_finger" link2="right_gripper_finger" reason="Never"/>
 </robot>
