@@ -28,4 +28,51 @@
             </plugin>
         </sensor>
     </gazebo>
+
+    <gazebo>
+        <plugin filename="libgazebo_mimic_joint_plugin.so" name="gripper_right_knuckle_joint">
+            <joint>gripper_left_knuckle_joint</joint>
+            <mimicJoint>gripper_right_knuckle_joint</mimicJoint>
+            <multiplier>-1.0</multiplier>
+        </plugin>
+
+        <plugin filename="libgazebo_mimic_joint_plugin.so" name="gripper_left_inner_knuckle_joint">
+            <joint>gripper_right_knuckle_joint</joint>
+            <mimicJoint>gripper_left_inner_knuckle_joint</mimicJoint>
+            <multiplier>-1.0</multiplier>
+        </plugin>
+
+        <plugin filename="libgazebo_mimic_joint_plugin.so" name="gripper_right_inner_knuckle_joint">
+            <joint>gripper_right_knuckle_joint</joint>
+            <mimicJoint>gripper_right_inner_knuckle_joint</mimicJoint>
+        </plugin>
+
+        <plugin filename="libgazebo_mimic_joint_plugin.so" name="gripper_left_finger_tip_joint">
+            <joint>gripper_right_knuckle_joint</joint>
+            <mimicJoint>gripper_left_finger_tip_joint</mimicJoint>
+        </plugin>
+
+        <plugin filename="libgazebo_mimic_joint_plugin.so" name="gripper_right_finger_tip_joint">
+            <joint>gripper_right_knuckle_joint</joint>
+            <mimicJoint>gripper_right_finger_tip_joint</mimicJoint>
+            <multiplier>-1.0</multiplier>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="gripper_left_finger_tip_link">
+        <kp>1000000.0</kp>
+        <kd>1.0</kd>
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+    <gazebo reference="gripper_right_finger_tip_link">
+        <kp>1000000.0</kp>
+        <kd>1.0</kd>
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+
 </robot>
