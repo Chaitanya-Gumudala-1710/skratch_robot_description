@@ -9,7 +9,6 @@
     <xacro:include filename="arm/kinova_spherical_wrist_one.xacro"/>
     <xacro:include filename="arm/kinova_spherical_wrist_two.xacro"/>
     <xacro:include filename="arm/kinova_camera.xacro"/>
-    <xacro:include filename="gripper/gripper_base.xacro"/>
     <xacro:include filename="robotiq_gripper/robotiq_gripper.xacro"/>
     <xacro:include filename="kinova_arm_gazebo.xacro"/>
     <xacro:include filename="$(find kinova_arm_moveit_config)/config/kinova_arm.ros2_control.xacro"/>
