@@ -7,7 +7,7 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
-    kinova_gripper_controller:
+    kinova_arm_gripper_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
@@ -30,11 +30,10 @@ kinova_arm_controller:
     state_interfaces:
       - position
       - velocity
-kinova_gripper_controller:
+kinova_arm_gripper_controller:
   ros__parameters:
     joints:
-      - left_finger_joint
-      - right_finger_joint
+      - gripper_left_knuckle_joint
     command_interfaces:
       - position
       - velocity

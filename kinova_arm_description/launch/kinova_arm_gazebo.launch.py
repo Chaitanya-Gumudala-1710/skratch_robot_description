@@ -43,7 +43,7 @@ def generate_launch_description():
     )
 
     load_gripper_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'kinova_gripper_controller'],
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'kinova_arm_gripper_controller'],
         output='screen'
     )
 
