@@ -10,7 +10,7 @@
     <xacro:include filename="arm/kinova_spherical_wrist_two.xacro"/>
     <xacro:include filename="arm/kinova_camera.xacro"/>
     <xacro:include filename="robotiq_gripper/robotiq_gripper.xacro"/>
-    <xacro:include filename="kinova_arm_gazebo.xacro"/>
+    <xacro:include filename="$(find kinova_arm_gazebo)/gazebo/kinova_arm_gazebo.xacro"/>
     <xacro:include filename="$(find kinova_arm_moveit_config)/config/kinova_arm.ros2_control.xacro"/>
     <xacro:kinova_arm_ros2_control name="kinova_arm" initial_positions_file="$(find kinova_arm_moveit_config)/config/initial_positions.yaml"/>
     
@@ -21,8 +21,7 @@
             <inertia ixx="5.0" ixy="0" ixz="0" iyy="5.0" iyz="0" izz="5.0"/>
         </inertial>
     </link>
-    
-      
+
     <xacro:kinova_base/>
     <joint name="arm_base_joint" type="fixed">
         <origin xyz="0.0 0.0 0.0" rpy="1.57 0.0 3.14"/>
@@ -102,6 +101,5 @@
         <parent link="kinova_camera"/>
         <child link="kinova_camera_optical_frame"/>
     </joint>
-
     
 </robot>

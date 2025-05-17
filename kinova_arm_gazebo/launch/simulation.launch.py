@@ -64,21 +64,6 @@ def generate_launch_description():
         )
     )
 
-    # static_tf_base_footprint_to_base_link = Node(
-    #     package='tf2_ros',
-    #     executable='static_transform_publisher',
-    #     arguments=['0', '0', '0', '0', '0', '0', 'base_footprint', 'arm_base_link'],
-    #     output='screen'
-    # )
-
-    # static_tf_odom_to_base_link = Node(
-    #     package='tf2_ros',
-    #     executable='static_transform_publisher',
-    #     arguments=['0', '0', '0', '0', '0', '0', 'odom', 'arm_base_link'],
-    #     output='screen'
-    # )
-
-
     # Launch Gazebo with ROS integration
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -133,6 +118,5 @@ def generate_launch_description():
         ),
 
         launch_rviz_after_controllers,
-        # static_tf_base_footprint_to_base_link,
 
     ])
