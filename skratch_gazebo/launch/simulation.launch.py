@@ -43,7 +43,7 @@ def generate_launch_description():
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'kinova_arm_gripper_controller'],
         output='screen'
     )
-    
+
     static_tf_base_footprint_to_base_link = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -60,7 +60,6 @@ def generate_launch_description():
         }.items()
     )
 
-    # Spawn robot entity in Gazebo
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -75,7 +74,16 @@ def generate_launch_description():
         parameters=[{'input_topic': '/lidar_front/out', 'output_topic': '/scan'}],
         output='screen'
     )
-    
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_file],
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen'
+    )
+
     delayed_spawn = TimerAction(
         period=1.0,
         actions=[spawn_entity]
@@ -91,6 +99,7 @@ def generate_launch_description():
         robot_state_publisher,
         gazebo_launch,
         delayed_spawn,
+        # rviz_node,
 
         RegisterEventHandler(
             event_handler=OnProcessExit(
@@ -115,5 +124,4 @@ def generate_launch_description():
 
         static_tf_base_footprint_to_base_link,
         lidar_remap_node
-
     ])

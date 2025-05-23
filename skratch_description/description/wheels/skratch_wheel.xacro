@@ -2,26 +2,11 @@
 <robot name="skratch_wheel" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="skratch_wheel" params="name parent">
 
-        <!-- <xacro:if value="${movable_joints}">
-            
-            <transmission name="${name}_transmission">
-                <type>transmission_interface/SimpleTransmission</type>
-                <joint name="${name}_joint">
-                    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                </joint>
-                <actuator name="${name}_motor">
-                    <mechanicalReduction>1.0</mechanicalReduction>
-                    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                </actuator>
-            </transmission>
-        </xacro:if> -->
-
-
         <link name="${name}">
             <inertial>
-                <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0" />
-                <mass value="0.25" />
-                <inertia ixx="0.0001913" iyy="0.0001913" izz="0.0003315" ixy="0.0" iyz="0.0" ixz="0.0" />
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="1.56317"/>
+                <inertia ixx="0.00101253363" ixy="0.00000000000" ixz="0.00000001020" iyy="0.00157998524" iyz="-0.00000055474" izz="0.00101282739"/>
             </inertial>
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -42,5 +27,6 @@
         <gazebo reference="${name}">
             <material>Gazebo/Black</material>
         </gazebo>
+        
     </xacro:macro>
 </robot>
