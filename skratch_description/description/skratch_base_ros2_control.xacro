@@ -1,88 +1,88 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
-            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
-        <joint name="front_left_wheel_drive_wheel_left_joint">
+        <joint name="front_left_drive_left_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="front_left_wheel_drive_wheel_right_joint">
+        <joint name="front_left_drive_right_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="front_left_wheel_drive_joint">
+        <joint name="front_left_drive_pivot_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="front_right_wheel_drive_wheel_left_joint">
+        <joint name="front_right_drive_left_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="front_right_wheel_drive_wheel_right_joint">
+        <joint name="front_right_drive_right_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="front_right_wheel_drive_joint">
+        <joint name="front_right_drive_pivot_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="rear_left_wheel_drive_wheel_left_joint">
+        <joint name="rear_left_drive_left_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>    
 
-        <joint name="rear_left_wheel_drive_wheel_right_joint">
+        <joint name="rear_left_drive_right_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="rear_left_wheel_drive_joint">
+        <joint name="rear_left_drive_pivot_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="rear_right_wheel_drive_wheel_left_joint">
+        <joint name="rear_right_drive_left_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="rear_right_wheel_drive_wheel_right_joint">
+        <joint name="rear_right_drive_right_hub_wheel_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="rear_right_wheel_drive_joint">
+        <joint name="rear_right_drive_pivot_joint">
             <command_interface name="velocity"/>
             <command_interface name="position"/>
             <state_interface name="position"/>
