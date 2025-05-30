@@ -10,6 +10,8 @@
     <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_gazebo.xacro"/>
     <xacro:include filename="base/skratch_arm_base_plate.xacro"/>
     <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm_macro.xacro"/>
+    <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_ros2_control.xacro"/>
+    <xacro:skratch_ros_control name="skratch_ros_control" initial_positions_file="$(find kinova_arm_gazebo)/config/initial_positions.yaml"/>
 
     <link name="base_link"></link>
     

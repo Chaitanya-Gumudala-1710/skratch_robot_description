@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
     <!-- <gazebo>
         <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+<<<<<<< HEAD
             <ros>
                 <remapping>cmd_vel:=cmd_vel</remapping>
                 <remapping>odom:=odom</remapping>
@@ -19,6 +20,20 @@
             <parameters>$(find skratch_gazebo)/config/skratch_base_controller.yaml</parameters>
         </plugin>
     </gazebo>
+=======
+                <ros>
+                    <remapping>cmd_vel:=cmd_vel</remapping>
+                    <remapping>odom:=odom</remapping>
+                </ros>
+                <commandTopic>cmd_vel</commandTopic>
+                <odometryTopic>odom</odometryTopic>
+                <odometryFrame>odom</odometryFrame>
+                <robotBaseFrame>base_link</robotBaseFrame>
+                <odometryRate>20.0</odometryRate>
+                <publishOdomTf>true</publishOdomTf> 
+            </plugin>
+    </gazebo> -->
+>>>>>>> classic
 
     <gazebo reference="front_lidar">
         <sensor type="ray" name="front_lidar">
