@@ -11,8 +11,7 @@
         <xacro:include filename="$(find kinova_arm_description)/description/arm/kinova_camera.xacro"/>
         <xacro:include filename="$(find kinova_arm_description)/description/robotiq_gripper/robotiq_gripper.xacro"/>
         <xacro:include filename="$(find kinova_arm_gazebo)/gazebo/kinova_arm_gazebo.xacro"/>
-        <xacro:include filename="$(find kinova_arm_moveit_config)/config/kinova_arm.ros2_control.xacro"/>
-        <xacro:kinova_arm_ros2_control name="kinova_arm" initial_positions_file="$(find kinova_arm_moveit_config)/config/initial_positions.yaml"/>
+       
 
         <xacro:kinova_base/>
         

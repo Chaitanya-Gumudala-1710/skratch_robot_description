@@ -44,6 +44,12 @@ def generate_launch_description():
         output='screen'
     )
 
+    load_base_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'skratch_base_controller'],
+        output='screen'
+    )
+
+
     static_tf_base_footprint_to_base_link = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -107,7 +113,7 @@ def generate_launch_description():
                 on_exit=[load_arm_controller]
             )
         ),
-
+        
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=load_arm_controller,
@@ -121,7 +127,12 @@ def generate_launch_description():
                 on_exit=[load_joint_state_controller]
             )
         ),
-
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_controller,
+                on_exit=[load_base_controller]
+            )
+        ),
         static_tf_base_footprint_to_base_link,
         lidar_remap_node
     ])
