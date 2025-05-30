@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
     <gazebo>
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <parameters>$(find skratch_ros_control)/config/skratch_controller.yaml</parameters>
+            <parameters>$(find skratch_gazebo)/config/skratch_controller.yaml</parameters>
         </plugin>   
     </gazebo>
     <xacro:macro name="skratch_ros_control" params="name initial_positions_file">

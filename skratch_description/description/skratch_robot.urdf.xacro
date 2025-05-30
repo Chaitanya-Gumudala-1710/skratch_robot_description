@@ -6,7 +6,6 @@
     <xacro:include filename="base/skratch_wheel_support.xacro"/>
     <xacro:include filename="wheels/kelo_drive_top_part.xacro"/>
     <xacro:include filename="lidar/lidar.xacro"/>
-    <xacro:include filename="$(find skratch_description)/description/skratch_base_ros2_control.xacro"/>
     <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_gazebo.xacro"/>
     <xacro:include filename="base/skratch_arm_base_plate.xacro"/>
     <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm_macro.xacro"/>
