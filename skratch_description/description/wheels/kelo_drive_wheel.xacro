@@ -23,9 +23,12 @@
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="1.56317"/>
                 <inertia ixx="0.00101253363" ixy="0.00000000000" ixz="0.00000001020" iyy="0.00157998524" iyz="-0.00000055474" izz="0.00101282739"/>
-            </inertial>
-            
+            </inertial>     
         </link> 
+
+        <gazebo reference="${name}_link">
+            <material>Gazebo/Black</material>
+        </gazebo>
 
         <joint name="${name}_joint" type="continuous">
             <xacro:insert_block name="origin" />
