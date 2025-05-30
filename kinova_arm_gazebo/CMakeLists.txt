@@ -23,7 +23,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY gazebo launch
+  DIRECTORY config gazebo launch
   DESTINATION share/${PROJECT_NAME}
 )
 

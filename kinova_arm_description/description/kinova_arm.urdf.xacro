@@ -2,6 +2,8 @@
 <robot name="kinova_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm_macro.xacro"/>
+    <xacro:include filename="$(find kinova_arm_gazebo)/gazebo/kinova_arm_ros2_control.xacro"/>
+    <xacro:kinova_arm_ros2_control name="kinova_arm" initial_positions_file="$(find kinova_arm_gazebo)/config/initial_positions.yaml"/>
 
     <xacro:kinova_arm/>
     <joint name="arm_base_joint" type="fixed">
