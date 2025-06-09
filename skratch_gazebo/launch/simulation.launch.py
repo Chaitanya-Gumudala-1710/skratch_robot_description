@@ -44,10 +44,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    load_base_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'skratch_base_controller'],
-        output='screen'
-    )
 
 
     static_tf_base_footprint_to_base_link = Node(
@@ -127,12 +123,7 @@ def generate_launch_description():
                 on_exit=[load_joint_state_controller]
             )
         ),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=load_joint_state_controller,
-                on_exit=[load_base_controller]
-            )
-        ),
+        
+        lidar_remap_node,
         static_tf_base_footprint_to_base_link,
-        lidar_remap_node
     ])

@@ -30,12 +30,11 @@
 
         </link> 
 
-        <joint name="${name}_pivot_joint" type="continuous">
+        <joint name="${name}_pivot_joint" type="fixed">
             <xacro:insert_block name="origin" />
             <axis xyz="0 0 1"/>
             <parent link="${parent}"/>
             <child link="${name}_pivot_link" />
-            <dynamics damping="0.1" friction="0.05"/>
             <limit effort="2.0" velocity="1.0"/>
         </joint>
 

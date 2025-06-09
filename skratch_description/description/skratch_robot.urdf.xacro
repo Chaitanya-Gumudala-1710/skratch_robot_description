@@ -9,8 +9,8 @@
     <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_gazebo.xacro"/>
     <xacro:include filename="base/skratch_arm_base_plate.xacro"/>
     <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm_macro.xacro"/>
-    <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_ros2_control.xacro"/>
-    <xacro:skratch_ros_control name="skratch_ros_control" initial_positions_file="$(find kinova_arm_gazebo)/config/initial_positions.yaml"/>
+    <xacro:include filename="$(find kinova_arm_gazebo)/gazebo/kinova_arm_ros2_control.xacro"/>
+    <xacro:kinova_arm_ros2_control name="kinova_arm" initial_positions_file="$(find kinova_arm_gazebo)/config/initial_positions.yaml"/>
 
     <link name="base_link"></link>
     
@@ -70,19 +70,19 @@
         <child link="kinova_base"/>
     </joint>
 
-    <xacro:kelo_drive_top_part name="front_left_drive_top_part" parent="skratch_left_wheel_support" drive_name="front_left_drive">
+    <xacro:kelo_drive_top_part name="front_left_drive_top_part" parent="skratch_left_wheel_support" drive_name="skratch_1_drive">
         <origin xyz="0.202 0 0.018" rpy="3.14 0 0.0"/>
     </xacro:kelo_drive_top_part>
 
-    <xacro:kelo_drive_top_part name="front_right_drive_top_part" parent="skratch_right_wheel_support" drive_name="front_right_drive">
+    <xacro:kelo_drive_top_part name="front_right_drive_top_part" parent="skratch_right_wheel_support" drive_name="skratch_2_drive">
         <origin xyz="-0.202 0 0.018" rpy="3.14 0 0.0"/>
     </xacro:kelo_drive_top_part>
 
-    <xacro:kelo_drive_top_part name="rear_left_drive_top_part" parent="skratch_left_wheel_support" drive_name="rear_left_drive">
+    <xacro:kelo_drive_top_part name="rear_left_drive_top_part" parent="skratch_left_wheel_support" drive_name="skratch_3_drive">
         <origin xyz="-0.202 0 0.018" rpy="3.14 0 0.0"/>
     </xacro:kelo_drive_top_part>
 
-    <xacro:kelo_drive_top_part name="rear_right_drive_top_part" parent="skratch_right_wheel_support" drive_name="rear_right_drive">
+    <xacro:kelo_drive_top_part name="rear_right_drive_top_part" parent="skratch_right_wheel_support" drive_name="skratch_4_drive">
         <origin xyz="0.202 0 0.018" rpy="3.14 0 0.0"/>
     </xacro:kelo_drive_top_part>
 
