@@ -27,6 +27,10 @@
             
         </link> 
 
+        <gazebo reference="${name}_link">
+            <material>Gazebo/Black</material>
+        </gazebo>
+
         <joint name="${name}_joint" type="continuous">
             <xacro:insert_block name="origin" />
             <axis xyz="0 1 0"/>
