@@ -97,12 +97,9 @@ def generate_launch_description():
             default_value='true',
             description='Use simulation (Gazebo) clock if true'
         ),
-
         robot_state_publisher,
         gazebo_launch,
         delayed_spawn,
-        # rviz_node,
-
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,
@@ -123,7 +120,12 @@ def generate_launch_description():
                 on_exit=[load_joint_state_controller]
             )
         ),
-        
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_controller,
+                on_exit=[rviz_node]
+            )
+        ),
         lidar_remap_node,
         static_tf_base_footprint_to_base_link,
     ])
