@@ -7,7 +7,7 @@
     <xacro:include filename="wheels/kelo_drive_top_part.xacro"/>
     <xacro:include filename="lidar/lidar.xacro"/>
     <xacro:include filename="$(find skratch_gazebo)/gazebo/skratch_gazebo.xacro"/>
-    <xacro:include filename="base/skratch_arm_base_plate.xacro"/>
+    <xacro:include filename="base/skratch_base_plate.xacro"/>
     <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm_macro.xacro"/>
     <xacro:include filename="$(find kinova_arm_gazebo)/gazebo/kinova_arm_ros2_control.xacro"/>
     <xacro:kinova_arm_ros2_control name="kinova_arm" initial_positions_file="$(find kinova_arm_gazebo)/config/initial_positions.yaml"/>
@@ -56,9 +56,9 @@
         <child link="skratch_right_wheel_support"/>
     </joint>
 
-    <xacro:skratch_arm_base_plate name="skratch_arm_base_plate"/>
+    <xacro:skratch_base_plate name="skratch_arm_base_plate"/>
     <joint name="arm_base_plate_joint" type="fixed">
-        <origin xyz="0.2115 0.0 0.023" rpy="0.0 0.0 0.0"/>
+        <origin xyz="0.2115 0.005 0.023" rpy="0.0 0.0 0.0"/>
         <parent link="skratch_left_top_base"/>
         <child link="skratch_arm_base_plate"/>
     </joint>
@@ -99,6 +99,43 @@
         <origin xyz="0.318 -0.203 -0.1635" rpy="0.0 0.0 2.3214"/>
         <parent link="skratch_right_top_base"/>
         <child link="rear_lidar"/>
+        <axis xyz="0.0 0.0 1.0"/>
+    </joint>
+
+    <xacro:skratch_base_plate name="skratch_battery_base_plate"/>
+    <joint name="battery_base_plate_joint" type="fixed">
+        <origin xyz="-0.2115 0.005 0.023" rpy="0.0 0.0 3.1416"/>
+        <parent link="skratch_left_top_base"/>
+        <child link="skratch_battery_base_plate"/>
+    </joint>
+    <link name="battery_link">
+        <visual>
+            <geometry>
+                <box size="0.166 0.196 0.175"/>
+            </geometry>
+            <material name="battery_color">
+                <color rgba="0.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.166 0.196 0.175"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="7.0"/>
+            <inertia ixx="0.403" ixy="0.0" ixz="0.0" iyy="0.345" iyz="0.0" izz="0.388"/>
+        </inertial>
+    </link>
+    <gazebo reference="battery_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="battery_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0875" rpy="0.0 0.0 0.0"/>
+        <parent link="skratch_battery_base_plate"/>
+        <child link="battery_link"/>
         <axis xyz="0.0 0.0 1.0"/>
     </joint>
 </robot>
